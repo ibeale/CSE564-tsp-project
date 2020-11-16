@@ -15,7 +15,7 @@ public class Repository extends Observable {
 		return repo;
 	}
 	
-	public void addPoints(int x, int y) {
+	public void addPoints(double x, double y) {
 		Point point = new Point(x, y);
 		paintPoints.add(point);
 		setChanged();

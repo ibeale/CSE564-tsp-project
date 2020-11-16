@@ -21,8 +21,8 @@ public class Canvas extends JPanel{
 		ArrayList<Point> points = Repository.getInstance().getPoint();
         g.setColor(Color.BLACK);
         for(Point x : points) {
-        	int[] a = x.getPoint();
-        	g.drawOval(a[0], a[1], 8, 8);
+        	double[] a = x.getPoint();
+        	g.drawOval((int) a[0], (int) a[1], 8, 8);
         }
         	
     }

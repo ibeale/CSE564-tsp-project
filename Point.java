@@ -1,14 +1,14 @@
 
 public class Point {
-	private int x, y;
+	private double x, y;
 
-    public Point(int x1, int y1) {
+    public Point(double x1, double y1) {
         this.x = x1;
         this.y = y1;
     }
 
-    public int[] getPoint() {
-        int[] a = { x, y };
+    public double[] getPoint() {
+        double[] a = { x, y };
         return a;
     }
 

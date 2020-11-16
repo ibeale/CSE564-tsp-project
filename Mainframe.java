@@ -46,9 +46,9 @@ public class Mainframe extends JFrame implements Observer{
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setLayout(new BorderLayout());
 		Canvas ui = new Canvas();
-        ui.addMouseListener((MouseListener) mouseController);
+		ui.addMouseListener((MouseListener) mouseController);
 		this.add(ui, BorderLayout.CENTER);
-	    this.setLocationRelativeTo(null);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
