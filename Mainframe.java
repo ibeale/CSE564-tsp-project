@@ -16,6 +16,7 @@ public class Mainframe extends JFrame implements Observer{
     JMenuItem i1, i2, i3, i4, i5;  
 	public Mainframe(){
 		Controller actionController = new ActionController();
+		Controller mouseController = new MouseController();
 		this.setTitle("BTX");
 		
 		
@@ -45,6 +46,7 @@ public class Mainframe extends JFrame implements Observer{
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setLayout(new BorderLayout());
 		Canvas ui = new Canvas();
+        ui.addMouseListener((MouseListener) mouseController);
 		this.add(ui, BorderLayout.CENTER);
 	    this.setLocationRelativeTo(null);
 		this.setVisible(true);

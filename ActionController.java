@@ -9,8 +9,7 @@ public class ActionController extends Controller implements ActionListener{
 		System.out.println(action);
 		switch(action){
 			case "Open" :
-				FileChoose nv = new FileChoose();
+				new FileChoose();
 		}
 	}
-
 }

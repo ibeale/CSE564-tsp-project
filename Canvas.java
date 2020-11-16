@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -9,9 +8,7 @@ public class Canvas extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	public Canvas() {
-		Controller mouseController = new MouseController();
 		this.setLayout(new BorderLayout());
-        addMouseListener((MouseListener) mouseController);
 	}
 	
 	@Override
