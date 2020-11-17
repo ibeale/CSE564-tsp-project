@@ -18,7 +18,8 @@ public class Repository extends Observable {
 	private Repository() {
 		this.points = new ArrayList<>();
 		this.paths = new ArrayList<>();
-		this.status = "RUN";
+		this.sortedPaths = new ArrayList<>();
+		this.status = "STOP";
 		this.threadPointIndex = 0;
 	}
 	
@@ -59,11 +60,11 @@ public class Repository extends Observable {
 		catch(FileNotFoundException e) {
 			System.out.println("The file could not be found.");
 		}
-		printPoints(); // DEBUGGING only
+//		printPoints(); // DEBUGGING only
 		notifyView();
 	}
 	
-	public void normalizePoints(float xMin, float xMax, float yMin, float yMax) {
+	private void normalizePoints(float xMin, float xMax, float yMin, float yMax) {
 		int WINDOW_LENGTH = 725;
 		int WINDOW_HEIGHT = 725;
 		
@@ -93,7 +94,13 @@ public class Repository extends Observable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Path> getTopKPaths(int k) {
+		if(sortedPaths.size() < k)
+			return new ArrayList<Path>(sortedPaths.subList(0, sortedPaths.size()));
 		
+		return new ArrayList<Path>(sortedPaths.subList(0, k));
 		
 	}
 	
@@ -159,6 +166,26 @@ public class Repository extends Observable {
 
 	public int getThreadPointIndex() {
 		return threadPointIndex;
+	}
+
+	public void setStatus(String status) {
+		System.out.println("reached setStatus");
+		if(status.equalsIgnoreCase("New"))
+		{
+			this.status = "STOP";
+			this.points.clear();
+			this.paths.clear();
+			this.sortedPaths.clear();
+			threadPointIndex = 0;
+		}
+		else if(status.equalsIgnoreCase("Run")) {
+			this.status = "RUN";
+			ThreadManager.startThreads();
+		}
+		else if(status.equalsIgnoreCase("Stop")) {
+			this.status = "STOP";
+		}
+		notifyView();
 	}
 
 	
