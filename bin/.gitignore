@@ -7,3 +7,7 @@
 /MouseController.class
 /ProjectMenu.class
 /Viewport.class
+/PathCalculator.class
+/PathJudge.class
+/PathJudge$1.class
+/ThreadManager.class

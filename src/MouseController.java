@@ -4,9 +4,12 @@ public class MouseController extends Controller implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-		Repository.getInstance().addPoint(x, y);
+		if(Repository.getInstance().getStatus() != "RUN") {
+			int x = e.getX();
+			int y = e.getY();
+			Repository.getInstance().addPoint(x, y);
+		}
+
 	}
 
 	@Override

@@ -19,9 +19,18 @@ public class ActionController extends Controller implements ActionListener{
 				if(a == JFileChooser.APPROVE_OPTION){
 					fileName = jfilechooser.getSelectedFile().getPath();
 					Repository.getInstance().readPointsFromFile(fileName);
-				}   
+				}
+				break;
 			case "Save":
 				Repository.getInstance().savePoints();
+				break;
+			case "About":	
+				break;
+//			case "New":
+//				Repository.getInstance().setStatus(action); break;
+			default:
+				Repository.getInstance().setStatus(action);
+				break;
 		}
 	}
 }
