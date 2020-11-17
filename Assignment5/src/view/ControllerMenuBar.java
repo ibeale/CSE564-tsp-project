@@ -1,2 +1,11 @@
-package view;public class ControllerMenuBar {
+package view;
+
+import javax.swing.*;
+
+public class ControllerMenuBar extends JMenuBar {
+    public ControllerMenuBar(){
+        super();
+        this.add(new FileMenu());
+        this.add(new ProjectMenu());
+    }
 }
