@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,8 +40,8 @@ public class Repository extends Observable {
 			while(fileReader.hasNextLine()) {
 				String[] splitLine = fileReader.nextLine().split(" ");
 				if (isNumeric(splitLine[0])) {
-					float x = Float.parseFloat(splitLine[1]);
-					float y = Float.parseFloat(splitLine[2]);
+					float x = Float.parseFloat(splitLine[2]);
+					float y = Float.parseFloat(splitLine[1]);
 					addPoint(x,y);
 					if(x < xMin)
 						xMin = x;
@@ -58,11 +60,12 @@ public class Repository extends Observable {
 			System.out.println("The file could not be found.");
 		}
 		printPoints(); // DEBUGGING only
+		notifyView();
 	}
 	
 	public void normalizePoints(float xMin, float xMax, float yMin, float yMax) {
-		int WINDOW_LENGTH = 900;
-		int WINDOW_HEIGHT = 700;
+		int WINDOW_LENGTH = 725;
+		int WINDOW_HEIGHT = 725;
 		
 		for (int i = 0; i < points.size(); i++) {
 			int index = points.get(i).getIndex();
@@ -75,7 +78,23 @@ public class Repository extends Observable {
 	}
 	
 	public void savePoints() {
-		//subtract y from window height when inverting y back
+		int WINDOW_HEIGHT = 725;
+		ArrayList<Point> writePoints = new ArrayList<Point>();
+		for (Point p: points) {
+			writePoints.add(new Point(p.getX(), WINDOW_HEIGHT-p.getY(),p.getIndex()));
+		}
+		try {
+			FileWriter pointWriter = new FileWriter("output.txt");
+			for(Point p: writePoints) {
+				pointWriter.write(p.getIndex() + " " + p.getY() + " " + p.getX() + "\n");
+			}
+			pointWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	private void printPoints() {
@@ -96,6 +115,7 @@ public class Repository extends Observable {
 	
 	public void addPoint(float x,float y) {
 		points.add(new Point(x,y,points.size()));
+		notifyView();
 	}
 	
 	public void notifyView() {
