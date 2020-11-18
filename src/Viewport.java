@@ -27,15 +27,11 @@ public class Viewport extends JPanel{// implements Observer {
         
         
         for(int j = 0; j < sortedPaths.size(); j++){
-            for(int i = 1; i < sortedPaths.get(j).getVisitOrder().length; i++){
+        	int[] visitOrder = sortedPaths.get(j).getVisitOrder();
+            for(int i = 1; i < visitOrder.length; i++){
             	g.setColor(colors[j]);
-                g.drawLine((int)points.get(i-1).getX(), (int)points.get(i-1).getY(), (int)points.get(i).getX(), (int)points.get(i).getY());
+                g.drawLine((int) points.get(visitOrder[i - 1]).getX(), (int)points.get(visitOrder[i - 1]).getY(), (int)points.get(visitOrder[i]).getX(), (int)points.get(visitOrder[i]).getY());
             }
         }
     }
-
-//    @Override
-//    public void update(Observable o, Object arg) {
-//        this.repaint();
-//    }
 }
