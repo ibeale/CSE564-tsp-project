@@ -180,12 +180,12 @@ public class Repository extends Observable {
 		}
 		else if(status.equalsIgnoreCase("Run")) {
 			this.status = "RUN";
+			this.paths.clear();
+			this.sortedPaths.clear();
 			threadPointIndex = 0;
 			ThreadManager.startThreads();
 		}
 		else if(status.equalsIgnoreCase("Stop")) {
-			this.paths.clear();
-			this.sortedPaths.clear();
 			this.status = "STOP";
 		}
 		notifyView();
