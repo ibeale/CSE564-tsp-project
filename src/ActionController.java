@@ -1,14 +1,12 @@
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import javax.swing.JFileChooser;
 
 public class ActionController extends Controller implements ActionListener{
-	private static final int DIM_X = 750;
-    private static final int DIM_Y = 800;
 	JFileChooser jfilechooser = new JFileChooser("."); 
 	private String fileName = new String();
-	private Double[] rawPoints;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();

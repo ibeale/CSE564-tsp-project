@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,6 +10,7 @@ public class PathJudge implements Runnable {
 		Repository repo = Repository.getInstance();
 		while(repo.getStatus().equals("RUN")) {
 			ArrayList<Path> paths = new ArrayList<Path>(repo.getPaths());
+			System.out.println(paths.size());
 			Collections.sort(paths, new Comparator<Path>() {
 				@Override
 				public int compare(Path path1, Path path2) {
@@ -19,10 +21,27 @@ public class PathJudge implements Runnable {
 					else
 						return 0;
 				}
+			
 			});
-			repo.setSortedPaths(paths);
-			if(repo.getSortedPaths().size() < 3 || !isTopKEqual(paths,3)) 
-				repo.notifyView();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(repo.getSortedPaths().size() < 3 || !isTopKEqual(paths,3)) {
+				System.out.println("notifiying view");
+				repo.setSortedPaths(paths);
+				
+			}
+			else {
+				repo.setSortedPaths(paths);
+			}
+			repo.notifyView();
+			
+			
+			
 		}
 	}
 	

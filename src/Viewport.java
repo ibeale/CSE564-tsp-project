@@ -9,7 +9,9 @@ import java.util.Observer;
 
 public class Viewport extends JPanel{// implements Observer {    
     public Viewport() {
-    	setSize(800,800);
+    	int WINDOWWIDTH = Config.getInstance().getWindowWidth();
+    	int WINDOWHEIGHT = Config.getInstance().getWindowHeight();
+    	setSize(WINDOWWIDTH,WINDOWHEIGHT);
     }
     
     @Override
@@ -26,7 +28,7 @@ public class Viewport extends JPanel{// implements Observer {
         
         
         
-        for(int j = 0; j < sortedPaths.size(); j++){
+        for(int j = sortedPaths.size()-1; j >= 0 ; j--){
         	int[] visitOrder = sortedPaths.get(j).getVisitOrder();
             for(int i = 1; i < visitOrder.length; i++){
             	g.setColor(colors[j]);

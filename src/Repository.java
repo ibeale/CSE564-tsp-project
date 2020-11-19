@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -65,8 +66,8 @@ public class Repository extends Observable {
 	}
 	
 	private void normalizePoints(float xMin, float xMax, float yMin, float yMax) {
-		int WINDOW_LENGTH = 725;
-		int WINDOW_HEIGHT = 725;
+		int WINDOW_LENGTH = Config.getInstance().getNormalizationFactorX();
+		int WINDOW_HEIGHT = Config.getInstance().getNormalizationFactorY();
 		
 		for (int i = 0; i < points.size(); i++) {
 			int index = points.get(i).getIndex();
@@ -79,7 +80,7 @@ public class Repository extends Observable {
 	}
 	
 	public void savePoints() {
-		int WINDOW_HEIGHT = 725;
+		int WINDOW_HEIGHT = Config.getInstance().getNormalizationFactorY();
 		ArrayList<Point> writePoints = new ArrayList<Point>();
 		for (Point p: points) {
 			writePoints.add(new Point(p.getX(), WINDOW_HEIGHT-p.getY(),p.getIndex()));

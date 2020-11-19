@@ -1,4 +1,5 @@
 
+
 public class Path {
 	int startingPointIndex;
 	int[] visitOrder;
@@ -28,7 +29,7 @@ public class Path {
         Path p = (Path) o; 
           
         // Compare the data members and return accordingly  
-        return this.startingPointIndex == p.getStartingPointIndex()  &&  this.distance == p.getDistance();
+        return (this.startingPointIndex == p.startingPointIndex  &&  this.distance == p.distance);
     } 
 	
 	public int getStartingPointIndex() {

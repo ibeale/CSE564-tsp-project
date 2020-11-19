@@ -1,3 +1,5 @@
 
-public abstract class Controller {
+
+public class Controller {
+
 }

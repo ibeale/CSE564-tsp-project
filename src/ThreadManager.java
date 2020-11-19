@@ -1,4 +1,5 @@
 
+
 public class ThreadManager {
 	public static void startThreads() {
 		Thread worker1 = new Thread(new PathCalculator());
@@ -10,5 +11,5 @@ public class ThreadManager {
 		worker3.start();
 		leader.start();
 	}
-	
+
 }
