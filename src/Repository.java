@@ -66,8 +66,8 @@ public class Repository extends Observable {
 	}
 	
 	private void normalizePoints(float xMin, float xMax, float yMin, float yMax) {
-		int WINDOW_LENGTH = Config.getInstance().getNormalizationFactorX();
-		int WINDOW_HEIGHT = Config.getInstance().getNormalizationFactorY();
+		int WINDOW_LENGTH = 725;
+		int WINDOW_HEIGHT = 725;
 		
 		for (int i = 0; i < points.size(); i++) {
 			int index = points.get(i).getIndex();
@@ -80,7 +80,7 @@ public class Repository extends Observable {
 	}
 	
 	public void savePoints() {
-		int WINDOW_HEIGHT = Config.getInstance().getNormalizationFactorY();
+		int WINDOW_HEIGHT = 725;
 		ArrayList<Point> writePoints = new ArrayList<Point>();
 		for (Point p: points) {
 			writePoints.add(new Point(p.getX(), WINDOW_HEIGHT-p.getY(),p.getIndex()));
@@ -181,12 +181,12 @@ public class Repository extends Observable {
 		}
 		else if(status.equalsIgnoreCase("Run")) {
 			this.status = "RUN";
+			this.paths.clear();
+			this.sortedPaths.clear();
 			threadPointIndex = 0;
 			ThreadManager.startThreads();
 		}
 		else if(status.equalsIgnoreCase("Stop")) {
-			this.paths.clear();
-			this.sortedPaths.clear();
 			this.status = "STOP";
 		}
 		notifyView();
