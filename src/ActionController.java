@@ -3,29 +3,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import javax.swing.JFileChooser;
+import javax.swing.JTextField;
 
 public class ActionController extends Controller implements ActionListener{
-	JFileChooser jfilechooser = new JFileChooser("."); 
-	private String fileName = new String();
+	JFileChooser jfilechooser = new JFileChooser(".");
+	private String fileName = new String(), saveFile = new String();
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
 		System.out.println(action);
 		switch(action){
 			case "Open" :
-				int a = jfilechooser.showOpenDialog(null); 
-				if(a == JFileChooser.APPROVE_OPTION){
+				int openDiag = jfilechooser.showOpenDialog(null); 
+				if(openDiag == JFileChooser.APPROVE_OPTION){
 					fileName = jfilechooser.getSelectedFile().getPath();
 					Repository.getInstance().readPointsFromFile(fileName);
 				}
 				break;
 			case "Save":
-				Repository.getInstance().savePoints();
+				int saveDiag = jfilechooser.showSaveDialog(null);
+				if (saveDiag == JFileChooser.APPROVE_OPTION) {
+					saveFile = jfilechooser.getSelectedFile().getPath();
+					Repository.getInstance().savePoints(saveFile);
+				}
 				break;
 			case "About":	
 				break;
-//			case "New":
-//				Repository.getInstance().setStatus(action); break;
 			default:
 				Repository.getInstance().setStatus(action);
 				break;

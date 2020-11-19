@@ -79,14 +79,14 @@ public class Repository extends Observable {
 		}
 	}
 	
-	public void savePoints() {
+	public void savePoints(String filePath) {
 		int WINDOW_HEIGHT = 725;
 		ArrayList<Point> writePoints = new ArrayList<Point>();
 		for (Point p: points) {
 			writePoints.add(new Point(p.getX(), WINDOW_HEIGHT-p.getY(),p.getIndex()));
 		}
 		try {
-			FileWriter pointWriter = new FileWriter("output.txt");
+			FileWriter pointWriter = new FileWriter(filePath);
 			for(Point p: writePoints) {
 				pointWriter.write(p.getIndex() + " " + p.getY() + " " + p.getX() + "\n");
 			}

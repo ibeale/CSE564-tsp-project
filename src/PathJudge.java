@@ -32,8 +32,7 @@ public class PathJudge implements Runnable {
 			
 			if(repo.getSortedPaths().size() < 3 || !isTopKEqual(paths,3)) {
 				System.out.println("notifiying view");
-				repo.setSortedPaths(paths);
-				
+				repo.setSortedPaths(paths);	
 			}
 			else {
 				repo.setSortedPaths(paths);
