@@ -1,9 +1,9 @@
 
 
 public class Path {
-	int startingPointIndex;
-	int[] visitOrder;
-	float distance;
+	private int startingPointIndex;
+	private int[] visitOrder;
+	private float distance;
 	
 	public Path(int startingPointIndex, int[] visitOrder, float distance) {
 		this.startingPointIndex = startingPointIndex;

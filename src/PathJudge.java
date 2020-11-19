@@ -9,8 +9,14 @@ public class PathJudge implements Runnable {
 	public void run() {
 		Repository repo = Repository.getInstance();
 		while(repo.getStatus().equals("RUN")) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ArrayList<Path> paths = new ArrayList<Path>(repo.getPaths());
-			System.out.println(paths.size());
+			System.out.println("# of paths calculated so far: " + paths.size());
 			Collections.sort(paths, new Comparator<Path>() {
 				@Override
 				public int compare(Path path1, Path path2) {
@@ -21,14 +27,7 @@ public class PathJudge implements Runnable {
 					else
 						return 0;
 				}
-			
 			});
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 			if(repo.getSortedPaths().size() < 3 || !isTopKEqual(paths,3)) {
 				System.out.println("notifiying view");
@@ -38,10 +37,8 @@ public class PathJudge implements Runnable {
 				repo.setSortedPaths(paths);
 			}
 			repo.notifyView();
-			
-			
-			
 		}
+		System.out.println("PathJudge: " + Thread.currentThread().getName() + " has finished.");
 	}
 	
 	private boolean isTopKEqual(ArrayList<Path> currentPaths, int k) {

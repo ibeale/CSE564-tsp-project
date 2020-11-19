@@ -10,11 +10,11 @@ import java.util.Scanner;
 
 public class Repository extends Observable {
 	private static Repository repositoryInstance = null;
-	ArrayList<Point> points;
-	ArrayList<Path> paths;
-	ArrayList<Path> sortedPaths;
-	String status;
-	int threadPointIndex;
+	private ArrayList<Point> points;
+	private ArrayList<Path> paths;
+	private ArrayList<Path> sortedPaths;
+	private String status;
+	private int threadPointIndex;
 	
 	private Repository() {
 		this.points = new ArrayList<>();
@@ -67,21 +67,28 @@ public class Repository extends Observable {
 	}
 	
 	private void normalizePoints(float xMin, float xMax, float yMin, float yMax) {
-		int WINDOW_LENGTH = 725;
-		int WINDOW_HEIGHT = 725;
+		int WINDOW_LENGTH = Config.getInstance().getNormalizationFactorX();
+		int WINDOW_HEIGHT = Config.getInstance().getNormalizationFactorY();
 		
 		for (int i = 0; i < points.size(); i++) {
 			int index = points.get(i).getIndex();
 			float x = points.get(i).getX();
 			float y = points.get(i).getY();
-			x = Math.round(  ((x-xMin)/(xMax - xMin)) * WINDOW_LENGTH);
-			y = WINDOW_HEIGHT - Math.round(  ((y-yMin)/(yMax - yMin)) * WINDOW_HEIGHT);
+			if(xMax > Config.getInstance().getWindowWidth() || yMax > Config.getInstance().getWindowHeight()) {
+				x = Math.round(  ((x-xMin)/(xMax - xMin)) * WINDOW_LENGTH);
+				y = WINDOW_HEIGHT - Math.round(  ((y-yMin)/(yMax - yMin)) * WINDOW_HEIGHT);
+			}
+			else {
+				y = WINDOW_HEIGHT - y;
+			}
 			points.set(i, new Point(x,y,index));
 		}
+		
+		return;
 	}
 	
 	public void savePoints(String filePath) {
-		int WINDOW_HEIGHT = 725;
+		int WINDOW_HEIGHT = Config.getInstance().getNormalizationFactorY();;
 		ArrayList<Point> writePoints = new ArrayList<Point>();
 		for (Point p: points) {
 			writePoints.add(new Point(p.getX(), WINDOW_HEIGHT-p.getY(),p.getIndex()));

@@ -10,6 +10,7 @@ public class PathCalculator implements Runnable {
 			Path path = calculateNearestNeighborsPath(startPoint);
 			Repository.getInstance().addPath(path);
 		}
+		System.out.println("PathCalculator " + Thread.currentThread().getName() + " has finished executing.");
 	}
 	
 	private Path calculateNearestNeighborsPath(Point currentCity){
