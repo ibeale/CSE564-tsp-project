@@ -35,7 +35,9 @@ public class Repository extends Observable {
 		float xMin,yMin,xMax,yMax;
 		xMin = yMin = Integer.MAX_VALUE;
 		xMax = yMax = Integer.MIN_VALUE;
-		points.clear();//DEBUGGING ONLY
+		points.clear();
+		this.paths.clear();
+		this.sortedPaths.clear();
 		File dataFile = new File(filename);
 		try {
 			Scanner fileReader = new Scanner(dataFile);
@@ -60,8 +62,7 @@ public class Repository extends Observable {
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("The file could not be found.");
-		}
-//		printPoints(); // DEBUGGING only
+		} 
 		notifyView();
 	}
 	
