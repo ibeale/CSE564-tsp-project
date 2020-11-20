@@ -35,9 +35,7 @@ public class Repository extends Observable {
 		float xMin,yMin,xMax,yMax;
 		xMin = yMin = Integer.MAX_VALUE;
 		xMax = yMax = Integer.MIN_VALUE;
-		points.clear();
-		this.paths.clear();
-		this.sortedPaths.clear();
+		resetApp();
 		File dataFile = new File(filename);
 		try {
 			Scanner fileReader = new Scanner(dataFile);
@@ -182,22 +180,23 @@ public class Repository extends Observable {
 		if(status.equalsIgnoreCase("New"))
 		{
 			this.status = "STOP";
-			this.points.clear();
-			this.paths.clear();
-			this.sortedPaths.clear();
-			threadPointIndex = 0;
+			resetApp();
 		}
 		else if(status.equalsIgnoreCase("Run")) {
 			this.status = "RUN";
-			this.paths.clear();
-			this.sortedPaths.clear();
-			threadPointIndex = 0;
 			ThreadManager.startThreads();
 		}
 		else if(status.equalsIgnoreCase("Stop")) {
 			this.status = "STOP";
 		}
 		notifyView();
+	}
+	
+	private void resetApp() {
+		this.points.clear();
+		this.paths.clear();
+		this.sortedPaths.clear();
+		this.threadPointIndex = 0;
 	}
 
 	

@@ -27,7 +27,7 @@ public class ActionController implements ActionListener{
 				break;
 			case "About":	
 				JOptionPane.showMessageDialog(Mainframe.getInstance(),
-											"Isaac Beale | 1219515869\n Nitish Tripathi | 1219500269\n Kyle Xue | 1210785963\n");
+											"Isaac Beale | 1219515869\nNitish Tripathi | 1219500269\nKyle Xue | 1210785963\n");
 				break;
 			default:
 				Repository.getInstance().setStatus(action);

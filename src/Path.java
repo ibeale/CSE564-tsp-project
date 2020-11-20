@@ -1,6 +1,6 @@
 
 
-public class Path {
+public class Path implements Comparable<Path>{
 	private int startingPointIndex;
 	private int[] visitOrder;
 	private float distance;
@@ -10,6 +10,7 @@ public class Path {
 		this.visitOrder = visitOrder;
 		this.distance = distance;
 	}
+	
 	
 	@Override
     public boolean equals(Object o) { 
@@ -42,6 +43,17 @@ public class Path {
 
 	public float getDistance() {
 		return distance;
+	}
+
+
+	@Override
+	public int compareTo(Path o) {
+		if(distance > o.distance)
+			return 1;
+		else if (distance < o.distance)
+			return -1;
+		else
+			return 0;
 	}
 	
 	
