@@ -7,19 +7,23 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Mainframe extends JFrame implements Observer{
-
-    public Mainframe(){
+	
+	private static Mainframe instance;
+	
+    private Mainframe(){
         super("Main Frame");
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setJMenuBar(new ControllerMenuBar());
         Viewport viewport = new Viewport();
         viewport.addMouseListener(new MouseController());
         Repository.getInstance().addObserver(this);
         this.add(viewport, BorderLayout.CENTER);
-        this.setSize(800,800);
-        this.setLayout(null);
-        this.setResizable(false);
-        this.setVisible(true);
+    }
+    
+    public static Mainframe getInstance() {
+    	if(instance == null) {
+    		instance = new Mainframe();
+    	}
+    	return instance;
     }
     
     @Override

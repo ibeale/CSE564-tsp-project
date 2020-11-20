@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class ActionController extends Controller implements ActionListener{
@@ -28,7 +29,8 @@ public class ActionController extends Controller implements ActionListener{
 				}
 				break;
 			case "About":	
-				break;
+				JOptionPane.showMessageDialog(Mainframe.getInstance(),
+											"Isaac Beale | 1219515869\n Nitish Tripathi | 1219500269\n Kyle Xue | 1210785963\n");
 			default:
 				Repository.getInstance().setStatus(action);
 				break;

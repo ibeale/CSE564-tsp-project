@@ -8,5 +8,6 @@ public class ControllerMenuBar extends JMenuBar {
         super();
         this.add(new FileMenu());
         this.add(new ProjectMenu());
+        this.add(new AboutMenu());
     }
 }
