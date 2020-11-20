@@ -8,7 +8,13 @@ public class PathCalculator implements Runnable {
 		while(Repository.getInstance().getStatus().equals("RUN") && Repository.getInstance().hasNextPoint()) {
 			Point startPoint = Repository.getInstance().getNextPoint();
 			Path path = calculateNearestNeighborsPath(startPoint);
-			Repository.getInstance().addPath(path);
+			if(path == null) {
+				System.out.println("PathCalculator " + Thread.currentThread().getName() + " calculated null path");
+				System.out.println("Starting point index: " + startPoint.getIndex());
+			}else {
+				Repository.getInstance().addPath(path);
+			}
+			
 		}
 		System.out.println("PathCalculator " + Thread.currentThread().getName() + " has finished executing.");
 	}

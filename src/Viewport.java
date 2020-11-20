@@ -1,13 +1,10 @@
 
-import javax.swing.*;
-
+import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
-public class Viewport extends JPanel{// implements Observer {    
+public class Viewport extends JPanel{   
     public Viewport() {
     	int WINDOWWIDTH = Config.getInstance().getWindowWidth();
     	int WINDOWHEIGHT = Config.getInstance().getWindowHeight();

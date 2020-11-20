@@ -1,8 +1,7 @@
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
-import java.awt.event.*;
-
-
-public class MouseController extends Controller implements MouseListener{
+public class MouseController implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
