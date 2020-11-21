@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Scanner;
 
@@ -104,17 +104,12 @@ public class Repository extends Observable {
 	}
 	
 	public ArrayList<Path> getTopKPaths(int k) {
+		sortedPaths.removeIf(Objects::isNull);
 		if(sortedPaths.size() < k)
 			return new ArrayList<Path>(sortedPaths.subList(0, sortedPaths.size()));
 		
 		return new ArrayList<Path>(sortedPaths.subList(0, k));
 		
-	}
-	
-	private void printPoints() {
-		for (Point point : points) {
-			System.out.println("index: " + point.getIndex() + "\tx: " + point.getX() + "\ty: " +point.getY());
-		}
 	}
 	
 	private boolean isNumeric(String str) {
@@ -183,6 +178,11 @@ public class Repository extends Observable {
 			resetApp();
 		}
 		else if(status.equalsIgnoreCase("Run")) {
+			if(sortedPaths.size() > 0 && sortedPaths.get(0)!=null && sortedPaths.get(0).getVisitOrder().length < this.points.size()) {
+				this.paths.clear();
+				this.sortedPaths.clear();
+				this.threadPointIndex = 0;
+			}
 			this.status = "RUN";
 			ThreadManager.startThreads();
 		}

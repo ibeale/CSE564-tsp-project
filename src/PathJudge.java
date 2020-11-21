@@ -7,24 +7,24 @@ public class PathJudge implements Runnable {
 	@Override
 	public void run() {
 		Repository repo = Repository.getInstance();
-		while(repo.getPaths().size() < repo.getPoints().size() && repo.getStatus().equals("RUN")) {
+		while(repo.getStatus().equals("RUN")) {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ArrayList<Path> paths = new ArrayList<Path>(repo.getPaths());
-			System.out.println("# of paths calculated so far: " + paths.size());
 			Collections.sort(paths, Comparator.nullsLast(Comparator.naturalOrder()));
 			if(repo.getSortedPaths().size() < 3 || !isTopKEqual(paths,3)) {
 				System.out.println("notifiying view");
+				repo.notifyView();
 				repo.setSortedPaths(paths);	
 			}
 			else {
 				repo.setSortedPaths(paths);
 			}
-			repo.notifyView();
+			if(repo.getPaths().size() >= repo.getPoints().size()) break; 
+			
 		}
 		System.out.println("PathJudge: " + Thread.currentThread().getName() + " has finished.");
 	}
