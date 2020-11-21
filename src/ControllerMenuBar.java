@@ -1,7 +1,4 @@
-
-
-
-import javax.swing.*;
+import javax.swing.JMenuBar;
 
 public class ControllerMenuBar extends JMenuBar {
     public ControllerMenuBar(){
