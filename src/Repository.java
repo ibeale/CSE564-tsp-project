@@ -178,7 +178,7 @@ public class Repository extends Observable {
 			resetApp();
 		}
 		else if(status.equalsIgnoreCase("Run")) {
-			if(sortedPaths.size() > 0 && sortedPaths.get(0)!=null && sortedPaths.get(0).getVisitOrder().length < this.points.size()) {
+			if(sortedPaths.size() > 0 && sortedPaths.get(0)!=null && sortedPaths.get(0).getVisitOrder().length <= this.points.size()) {
 				this.paths.clear();
 				this.sortedPaths.clear();
 				this.threadPointIndex = 0;
